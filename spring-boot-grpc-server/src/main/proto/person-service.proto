@@ -1,0 +1,39 @@
+syntax = "proto3";
+option java_package = "br.com.arcelino";
+option java_multiple_files = true;
+package br.com.arcelino;
+
+service PersonService {
+    rpc CreatePerson (PersonRequest) returns (PersonResponse);
+    rpc FindById (RequestById) returns (PersonResponse);
+    rpc findByName (FindByNameRequest) returns (PersonResponse);
+    rpc deleteById (RequestById) returns (PersonResponse);
+    rpc FindAll (EmptyRequest) returns (ListPersonResponse);
+}
+
+message RequestById {
+    int64 id = 1;
+}
+
+message FindByNameRequest {
+    string name = 1;
+}
+
+message EmptyRequest {}
+
+message PersonRequest {
+    string name = 1;
+    int32 age = 2;
+    string email = 3;
+}
+
+message PersonResponse {
+   int64 id = 1; 
+   string name = 2;
+   int32 age = 3;
+   string email = 4;
+}
+
+message ListPersonResponse {
+    repeated PersonResponse person = 1;
+}
