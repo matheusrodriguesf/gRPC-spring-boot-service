@@ -40,6 +40,14 @@ public class PersonService {
         return personMapper.toDto(person.get());
     }
 
+    public PersonResponseDto findByName(String name) {
+        var person = personRepository.findByNameIgnoreCase(name);
+        if (!person.isPresent()) {
+            throw new RuntimeException("Person not found");
+        }
+        return personMapper.toDto(person.get());
+    }
+
     public List<PersonResponseDto> all() {
         return null;
     }
