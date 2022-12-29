@@ -2,7 +2,9 @@ package br.com.arcelino.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.arcelino.EmptyRequest;
 import br.com.arcelino.FindByNameRequest;
+import br.com.arcelino.ListPersonResponse;
 import br.com.arcelino.PersonRequest;
 import br.com.arcelino.PersonResponse;
 import br.com.arcelino.RequestById;
@@ -70,4 +72,20 @@ public class PersonController extends PersonServiceImplBase {
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void findAll(EmptyRequest request, StreamObserver<ListPersonResponse> responseObserver) {
+        var persons = personService.all();
+        var response = ListPersonResponse.newBuilder();
+        persons.stream().map(person -> PersonResponse.newBuilder()
+                .setId(person.getId())
+                .setName(person.getName())
+                .setEmail(person.getEmail())
+                .setAge(person.getAge())
+                .build())
+                .forEach(response::addPerson);
+        responseObserver.onNext(response.build());
+        responseObserver.onCompleted();
+    }
+
 }

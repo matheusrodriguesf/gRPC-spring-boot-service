@@ -49,6 +49,7 @@ public class PersonService {
     }
 
     public List<PersonResponseDto> all() {
-        return null;
+        var persons = personRepository.findAll();
+        return persons.stream().map(personMapper::toDto).toList();
     }
 }
