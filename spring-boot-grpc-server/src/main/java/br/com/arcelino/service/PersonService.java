@@ -18,26 +18,28 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    @Autowired
-    private PersonMapper personMapper;
+    // @Autowired
+    // private PersonMapper personMapper;
 
     @Transactional
     public PersonResponseDto create(PersonValueFormDto valuesForm) {
-        var person = personMapper.toEntity(valuesForm);
-        person = personRepository.save(person);
-        return personMapper.toDto(person);
+        return null;
+        // var person = personMapper.toEntity(valuesForm);
+        // person = personRepository.save(person);
+        // return personMapper.toDto(person);
     }
 
     public void delete(Long id) {
-        personRepository.deleteById(id);
+        // personRepository.deleteById(id);
     }
 
     public PersonResponseDto findById(Long id) {
-        var person = personRepository.findById(id);
-        if (!person.isPresent()) {
-            throw new RuntimeException("Person not found");
-        }
-        return personMapper.toDto(person.get());
+        return null;
+        // var person = personRepository.findById(id);
+        // if (!person.isPresent()) {
+        //     throw new RuntimeException("Person not found");
+        // }
+        // return personMapper.toDto(person.get());
     }
 
     public List<PersonResponseDto> all() {
